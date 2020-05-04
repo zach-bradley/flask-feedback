@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<form>
+  {{form.hidden_tag() }}
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <div class="form-group">
+    {{field.label}}
+    {{field(class="form-control", required=False)}}
+  </div>
+    {% for err in field.errors %}
+    <div class="alert alert-danger" role="alert">
+     {{err}}
+    </div>
+    {% endfor %}
+  {% endfor %}
+</form>
+{% endblock %}
