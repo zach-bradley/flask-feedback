@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+  
+  <div class="container">
+    <h1>Profile</h1>
+    <hr>
+    <h3>First Name: {{user.first_name}}</h3>
+    <h3>Last Name: {{user.last_name}}</h3>
+    <h3>Email: {{user.email}}</h3>
+    <hr>
+    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteUser">Delete Profile</button>
+    <a href="/users/{{session.username}}/feedback/add" class="btn btn-primary">Add Feedback</a>
+    <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteUserLabel">Delete?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete your profile?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <a href="/users/{{session.username}}/delete" class="btn btn-danger">Confirm</a>
+          </div>
+        </div>
+      </div>
+    </div>   
+    <div class="container mt-3">
+      {% for fb in feedback %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{fb.title}}</h5>
+          <p class="card-text">{{fb.content}}</p>
+          <a href="/feedback/{{fb.id}}/update" class="card-link">Edit</a>
+          <a href="/feedback/{{fb.id}}/delete" class="card-link text-danger">Delete</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Register{% endblock %}
+{% block title %}Add Feedback{% endblock %}
 {% block content %}
 
 <div class="container">
-  <h1>Please Register Here:</h1>
-  <form action="/register" method="POST">
+  <h1>{{verb}} Your Feedback Here:</h1>
+  <form action="{{url}}" method="POST">
     {{form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
     <div class="form-group">
